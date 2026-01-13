@@ -33,7 +33,7 @@ export default function ManagePage({ items }) {
             {/* <span className="text-4xl">🎬</span> */}
             My Watchlist
           </h2>
-          <p className="text-slate-600">Manage your movies and TV shows</p>
+          <p className="text-slate-600">Manage your movies and shows</p>
         </div>
 
         {/* Add Item Card */}
@@ -59,7 +59,7 @@ export default function ManagePage({ items }) {
               value={type}
             >
               <option value="movie">🎥 Movie</option>
-              <option value="show">📺 TV Show</option>
+              <option value="show">📺 Show</option>
             </select>
             <button
               onClick={addItem}

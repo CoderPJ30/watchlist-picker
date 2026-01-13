@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import ManagePage from "./pages/ManagePage";
 import RandomPage from "./pages/RandomPage";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase";
+import logo from "./assets/logo.png";
 
 // Separate Navigation component to use useLocation hook
 function Navigation() {
@@ -15,7 +16,7 @@ function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex items-center gap-2">
-            <span className="text-3xl">🎬</span>
+            <img src={logo} alt="Logo" className="h-15 w-15" />
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               WatchList Picker
             </span>
@@ -24,22 +25,22 @@ function Navigation() {
           {/* Navigation Links */}
           <div className="flex gap-2">
             <Link
-              to="/"
-              className={`px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 ${location.pathname === '/'
-                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+              to="/random"
+              className={`px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 ${location.pathname === '/random'
+                ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-md'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                }`}
+            >
+              🎲 Picker
+            </Link>
+            <Link
+              to="/manage"
+              className={`px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 ${location.pathname === '/manage'
+                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
             >
               📋 Manage
-            </Link>
-            <Link
-              to="/random"
-              className={`px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 ${location.pathname === '/random'
-                  ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-md'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                }`}
-            >
-              🎲 Random
             </Link>
           </div>
         </div>
@@ -67,8 +68,9 @@ export default function App() {
         {/* Main Content */}
         <main>
           <Routes>
-            <Route path="/" element={<ManagePage items={items} />} />
+            <Route path="/" element={<Navigate to="/random" replace />} />
             <Route path="/random" element={<RandomPage items={items} />} />
+            <Route path="/manage" element={<ManagePage items={items} />} />
           </Routes>
         </main>
       </div>

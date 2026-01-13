@@ -113,7 +113,7 @@ export default function RandomPage({ items }) {
                     </div>
 
                     {/* Decorative Ribbon */}
-                    <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500"></div>
+                    {/* <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500"></div> */}
                   </div>
 
                   {/* Content */}
